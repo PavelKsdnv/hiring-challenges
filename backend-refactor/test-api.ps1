@@ -7,7 +7,7 @@ Write-Host "`n=== Testing Assets API ==="
 $assets = Invoke-RestMethod "$base/api/v1/assets"
 $assets | ConvertTo-Json -Depth 1
 
-$signalId = $assets[0].signals[0].SignalId
+$signalId = $assets[0].signals[0].signal_id
 Write-Host "`n=== Found Signal ID: $signalId ==="
 
 Write-Host "`n=== Testing Measurements v1 ==="

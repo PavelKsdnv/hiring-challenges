@@ -1,18 +1,20 @@
 """Measurements router (v2 style but registered as v1)."""
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
 from datetime import datetime
 from services.measurement_service import MeasurementService
 from schemas.measurement_schema import SignalStatsResponse
 
 router = APIRouter()
 
-measurement_service = MeasurementService()
+def get_measurement_service() -> MeasurementService:
+    return MeasurementService()
 
 @router.get("/measurements/stats/{signal_id}", response_model=SignalStatsResponse)
 async def get_signal_stats(
     signal_id: str,
     from_date: str = Query(..., alias="from", description="Start date (ISO format)"),
-    to_date: str = Query(..., alias="to", description="End date (ISO format)")
+    to_date: str = Query(..., alias="to", description="End date (ISO format)"),
+    measurement_service: MeasurementService = Depends(get_measurement_service),
 ):
     """Calculate statistics for a signal over a date range.
 
