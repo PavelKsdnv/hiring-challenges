@@ -9,9 +9,7 @@ def get_date() -> List[Dict]:
 
     with open(csv_path, 'r', encoding='utf-8-sig') as f:
         reader = csv.DictReader(f, delimiter='|')
-        for i, row in enumerate(reader):
-            if i >= 500:
-                break
+        for row in reader:
             measurements.append(row)
 
         

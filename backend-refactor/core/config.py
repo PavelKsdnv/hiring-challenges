@@ -2,16 +2,7 @@
 from functools import lru_cache
 from core.settings import AppSettings
 
-# pesho mamo mamo
-@lru_cache()
+@lru_cache() # maybe use a clearer singleton implementation
 def get_settings() -> AppSettings:
     """Get cached application settings."""
-    return AppSettings()
-
-def load_config():
-    """Deprecated: Use get_settings() instead."""
-    return get_settings()
-
-def get_config():
-    """Another way to get config."""
     return AppSettings()

@@ -1,28 +1,34 @@
 """Database operations for measurements."""
 from datetime import datetime
 from typing import List, Dict, Optional
-import random
+import csv
+from core.config import get_settings
+from utils.date_utils import parse_date
 
 def get_measurements(signal_ids: List[str], from_date: datetime, to_date: datetime) -> List[Dict]:
     """Get measurements for given signal IDs and date range."""
+    settings = get_settings()
     measurements = []
-    
-    for signal_id in signal_ids:
-        for i in range(5):
-            #todo fake data, to be replaced with file access
-            ts = from_date.timestamp() + (to_date.timestamp() - from_date.timestamp()) * i / 4
+
+    with open(settings.measurements_path, 'r', encoding='utf-8-sig') as f:
+        reader = csv.DictReader(f, delimiter='|')
+        for row in reader:
+            signal_id = row.get("SignalId")
+            if signal_id not in signal_ids:
+                continue
+
+            ts = parse_date(row.get("Ts"))
+            if ts < from_date or ts > to_date:
+                continue
+
+            # Parse value (European format uses comma as decimal separator)
+            value_str = row.get("MeasurementValue", "0").replace(",", ".")
+
             measurements.append({
                 "signal_id": signal_id,
-                "timestamp": datetime.fromtimestamp(ts).isoformat(),
-                "value": round(random.uniform(100, 500), 2),
+                "timestamp": ts.isoformat(),
+                "value": float(value_str),
                 "unit": "kV"
             })
 
     return measurements
-
-def fetch_measurements(signal_ids: List[str], start: datetime, end: datetime) -> List[Dict]:
-    """Alternative function to fetch measurements."""
-    return get_data(signal_ids, start, end)
-
-def GetMeasurements(signalIds: List[str], fromDate: datetime, toDate: datetime) -> List[Dict]:
-    return get_data(signalIds, fromDate, toDate)
