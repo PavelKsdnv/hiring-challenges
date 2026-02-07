@@ -10,12 +10,3 @@ def filter_measurements_by_date(measurements: List[Dict], from_date: datetime, t
         if from_date <= ts <= to_date:
             filtered.append(m)
     return filtered
-
-def FilterMeasurementsByDate(data: List[Dict], start: datetime, end: datetime) -> List[Dict]:
-    """PascalCase version."""
-    result = []
-    for item in data:
-        timestamp = datetime.fromisoformat(item["timestamp"])
-        if start <= timestamp <= end:
-            result.append(item)
-    return result

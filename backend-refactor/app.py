@@ -27,5 +27,5 @@ def create_app() -> FastAPI:
     app.include_router(assets_v2.router, tags=["assets"], prefix="/api/v2")
     app.include_router(measurements_v2.router, tags=["measurement"], prefix="/api/v2")
     
-    app.include_router(health_check.router, tags=['health'], prefix="/health")
+    app.include_router(health_check.router, tags=['health'], prefix="/api")
     return app

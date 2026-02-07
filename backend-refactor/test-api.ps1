@@ -1,6 +1,9 @@
 $base = "http://localhost:8000"
 
-Write-Host "=== Testing Assets API ==="
+Write-Host "=== Testing Health ==="
+Invoke-RestMethod "$base/api/health" | ConvertTo-Json
+
+Write-Host "`n=== Testing Assets API ==="
 $assets = Invoke-RestMethod "$base/api/v1/assets"
 $assets | ConvertTo-Json -Depth 1
 

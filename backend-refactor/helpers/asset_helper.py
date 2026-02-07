@@ -10,13 +10,3 @@ def group_signals_by_asset(signals: List[Dict]) -> Dict[str, List[Dict]]:
             grouped[asset_id] = []
         grouped[asset_id].append(signal)
     return grouped
-
-def GroupSignalsByAsset(signalList: List[Dict]) -> Dict[str, List[Dict]]:
-    """PascalCase version. pesho? pascal case!?"""
-    result = {}
-    for sig in signalList:
-        aid = sig.get("AssetId")
-        if aid not in result:
-            result[aid] = []
-        result[aid].append(sig)
-    return result

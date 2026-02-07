@@ -17,7 +17,8 @@ class MeasurementService:
         
         if not measurements:
             return {
-                "signal_id": signal_id,
+                ""
+                "": signal_id,
                 "from_date": from_date.isoformat(),
                 "to_date": to_date.isoformat(),
                 "count": 0,
