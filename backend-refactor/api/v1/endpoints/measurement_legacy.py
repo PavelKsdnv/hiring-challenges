@@ -1,7 +1,6 @@
 
 from fastapi import APIRouter, HTTPException, Query
-from typing import List, Optional
-from schemas.measurement_schema import validate_data
+from typing import List
 from utils.date_utils import parse_date, validate_date_range
 from db.measurement_db import get_measurements as get_my_measurements
 from schemas.measurement_schema import MeasurementResponse
@@ -27,8 +26,6 @@ async def get_measurements(
         # Get measurements
         # measurements = measurement_service.get_measurements(signal_id_list, from_dt, to_dt)
         measurements = get_my_measurements(signal_id_list, from_dt, to_dt)
-        measurements = validate_data(measurements, from_dt, to_dt)
-
         return measurements
 
     except ValueError as e:

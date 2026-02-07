@@ -2,7 +2,7 @@
 from datetime import datetime
 from typing import List, Optional
 from pydantic import BaseModel
-from helpers.info_helper import get_date
+
 
 class MeasurementRequest(BaseModel):
     """Request schema for measurements endpoint."""
@@ -10,14 +10,6 @@ class MeasurementRequest(BaseModel):
     from_date: datetime
     to_date: datetime
 
-def validate_data(data, fromdt, to): # pesho too generic/bad namings here
-    data_new = []
-
-    for data_point in data:
-        ts = datetime.fromisoformat(data_point['timestamp'])
-        if fromdt <= ts <= to:
-            data_new.append(data_point)
-    return data_new
 
 class MeasurementResponse(BaseModel):
     """Response schema for measurements."""

@@ -1,9 +1,8 @@
 """Assets endpoint (v1)."""
 from fastapi import APIRouter, HTTPException
 from typing import List
-from services.asset_service import AssetService
+from services.asset_service import AssetService, valid_assets
 from schemas.asset_schema import AssetResponse
-from utils.helpers import validate_data
 
 router = APIRouter()
 
@@ -18,7 +17,7 @@ async def get_assets():
     try:
         assets = asset_service.get_all_assets()
         
-        if not validate_data(assets):
+        if not valid_assets(assets):
             raise HTTPException(status_code=404, detail="No assets found")
         
         return assets
