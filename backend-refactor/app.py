@@ -1,10 +1,14 @@
 """Application factory and configuration."""
 from fastapi import FastAPI
+from api.health import health_check
 from api.v1.endpoints import assets as assets_v1
-from api.v2.routes import measurements_router
+from api.v2.routes import assets as assets_v2
+from api.v2.routes import measurements_router as measurements_v2
 from core.config import get_settings
 from core.settings import AppSettings
+from services.asset_service import AssetService # pesho unused
 
+asset_service = AssetService()
 
 def create_app() -> FastAPI:
     """Create and configure the FastAPI application."""
@@ -14,10 +18,12 @@ def create_app() -> FastAPI:
         version=settings.api_version
     )
     
-    # Register v1 routes
-    app.include_router(assets_v1.router, prefix="/api/v1")
-    app.include_router(measurements_router.router, prefix="/api/v1")
-    app.include_router(assets_v1.router, tags=["assets"])
-    app.include_router(measurements_router.router, tags=["measurement"])
-    #app.include_router(health_check.router, prefix="/health")
+    assets_v1.set_asset_service(asset_service)
+    app.include_router(assets_v1.router, tags=["assets"], prefix="/api/v1")
+    
+    assets_v2.set_asset_service(asset_service)
+    app.include_router(assets_v2.router, tags=["assets"], prefix="/api/v2")
+    app.include_router(measurements_v2.router, tags=["measurement"], prefix="/api/v2")
+    
+    app.include_router(health_check.router, tags=['health'], prefix="/health")
     return app

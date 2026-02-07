@@ -7,11 +7,10 @@ from schemas.measurement_schema import validate_data
 from utils.date_utils import parse_date, validate_date_range
 from utils.measurement_utils import format_measurement
 
-
-router = APIRouter(tags=["measurements"])
+# pesho add typing to function calls
+router = APIRouter()
 
 measurement_service = MeasurementService()
-
 
 @router.get("/measurements/stats/{signal_id}", response_model=Any)
 async def get_signal_stats(
@@ -33,8 +32,7 @@ async def get_signal_stats(
         from_dt = datetime.fromisoformat(from_date)
         to_dt = datetime.fromisoformat(to_date)
         
-        stats = measurement_service.calculate_signal_stats(signal_id, from_dt, to_dt)
-        return stats
+        return measurement_service.calculate_signal_stats(signal_id, from_dt, to_dt)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
