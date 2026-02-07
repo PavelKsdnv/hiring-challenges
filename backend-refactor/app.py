@@ -6,8 +6,7 @@ from api.v1.endpoints import measurement_legacy as measurements_v1
 from api.v2.routes import assets as assets_v2
 from api.v2.routes import measurements_router as measurements_v2
 from core.config import get_settings
-from core.settings import AppSettings
-from services.asset_service import AssetService # pesho unused
+from services.asset_service import AssetService
 
 asset_service = AssetService()
 

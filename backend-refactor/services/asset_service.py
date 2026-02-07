@@ -1,6 +1,6 @@
 """Asset service layer."""
 from typing import List, Dict
-from db.asset_db import get_assets
+from database.asset_db import get_assets
 
 
 def valid_assets(assets: List[Dict]) -> bool:

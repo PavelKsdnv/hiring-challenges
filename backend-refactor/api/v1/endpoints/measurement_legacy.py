@@ -2,7 +2,7 @@
 from fastapi import APIRouter, HTTPException, Query
 from typing import List
 from utils.date_utils import parse_date, validate_date_range
-from db.measurement_db import get_measurements as get_my_measurements
+from database.measurement_db import get_measurements as get_my_measurements
 from schemas.measurement_schema import MeasurementResponse
 
 router = APIRouter(tags=["measurements"])

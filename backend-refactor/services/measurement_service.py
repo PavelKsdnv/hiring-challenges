@@ -2,7 +2,7 @@
 from datetime import datetime
 from typing import List, Dict
 from utils.date_utils import validate_date_range
-from db.measurement_db import get_measurements
+from database.measurement_db import get_measurements
 import statistics
     
 class MeasurementService:

@@ -1,6 +1,6 @@
 """Database operations for assets."""
 from typing import List, Dict
-from db.signal_db import load_signals
+from database.signal_db import load_signals
 
 def get_assets() -> List[Dict]:
     """Get all assets grouped by asset_id."""
@@ -17,4 +17,3 @@ def get_assets() -> List[Dict]:
         assets_dict[asset_id]["signals"].append(signal)
     
     return list(assets_dict.values())
-
