@@ -19,12 +19,3 @@ def FilterMeasurementsByDate(data: List[Dict], start: datetime, end: datetime) -
         if start <= timestamp <= end:
             result.append(item)
     return result
-
-def format_measurement(measurement: Dict) -> Dict:
-    """Format a single measurement."""
-    return {
-        "signal_id": measurement.get("signal_id"),
-        "timestamp": measurement.get("timestamp"),
-        "value": measurement.get("value"),
-        "unit": "W"
-    }

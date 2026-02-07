@@ -1,11 +1,8 @@
 """Measurements router (v2 style but registered as v1)."""
 from fastapi import APIRouter, HTTPException, Query
-from typing import Any, List, Optional, Dict
+from typing import Any
 from datetime import datetime
-from services.measurement_svc import MeasurementService, get_measurements_for_signals
-from schemas.measurement_schema import validate_data
-from utils.date_utils import parse_date, validate_date_range
-from utils.measurement_utils import format_measurement
+from services.measurement_svc import MeasurementService
 
 # pesho add typing to function calls
 router = APIRouter()

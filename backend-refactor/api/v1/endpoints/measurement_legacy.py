@@ -1,11 +1,8 @@
 
 from fastapi import APIRouter, HTTPException, Query
 from typing import List, Optional
-from datetime import datetime
-from services.measurement_svc import MeasurementService, get_measurements_for_signals
 from schemas.measurement_schema import validate_data
 from utils.date_utils import parse_date, validate_date_range
-from utils.measurement_utils import format_measurement
 from db.measurement_db import get_measurements as get_my_measurements
 from schemas.measurement_schema import MeasurementResponse
 
@@ -30,7 +27,6 @@ async def get_measurements(
         # Get measurements
         # measurements = measurement_service.get_measurements(signal_id_list, from_dt, to_dt)
         measurements = get_my_measurements(signal_id_list, from_dt, to_dt)
-        measurements = [format_measurement(m) for m in measurements]
         measurements = validate_data(measurements, from_dt, to_dt)
 
         return measurements
