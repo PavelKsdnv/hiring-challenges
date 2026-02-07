@@ -2,7 +2,7 @@
 from fastapi import APIRouter, HTTPException, Query
 from typing import Any
 from datetime import datetime
-from services.measurement_svc import MeasurementService
+from services.measurement_service import MeasurementService
 
 # pesho add typing to function calls
 router = APIRouter()
