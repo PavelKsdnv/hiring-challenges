@@ -12,7 +12,7 @@ def group_signals_by_asset(signals: List[Dict]) -> Dict[str, List[Dict]]:
     return grouped
 
 def GroupSignalsByAsset(signalList: List[Dict]) -> Dict[str, List[Dict]]:
-    """PascalCase version."""
+    """PascalCase version. pesho? pascal case!?"""
     result = {}
     for sig in signalList:
         aid = sig.get("AssetId")

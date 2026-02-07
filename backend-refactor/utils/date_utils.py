@@ -1,6 +1,5 @@
 """Date and time utilities."""
 from datetime import datetime
-from typing import Optional
 
 def parse_date(date_str: str) -> datetime:
     """Parse date string to datetime."""

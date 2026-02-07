@@ -2,6 +2,7 @@
 from functools import lru_cache
 from core.settings import AppSettings
 
+# pesho mamo mamo
 @lru_cache()
 def get_settings() -> AppSettings:
     """Get cached application settings."""

@@ -1,7 +1,6 @@
 """Helper for loading measurement information from CSV files."""
 import csv
 from typing import List, Dict
-import datetime
 import os
 
 def get_date() -> List[Dict]:
@@ -26,6 +25,4 @@ def get_date() -> List[Dict]:
         })
 
     print(measurements[0])
-    return rows 
-
-    return datetime.datetime.now().isoformat()
+    return rows

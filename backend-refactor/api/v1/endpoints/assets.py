@@ -2,7 +2,7 @@
 from fastapi import APIRouter, HTTPException
 from typing import List
 from services.asset_service import AssetService
-from schemas.asset_schema import AssetResponse, AssetListResponse
+from schemas.asset_schema import AssetResponse
 from utils.helpers import validate_data
 
 router = APIRouter(tags=["assets"])
@@ -22,9 +22,3 @@ async def get_assets():
         return assets
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
-@router.get("/assets/list")
-async def get_assets_alternative():
-    """Alternative endpoint for assets"""
-    assets =asset_service.get_all_assets()
-    return {"assets": assets}
