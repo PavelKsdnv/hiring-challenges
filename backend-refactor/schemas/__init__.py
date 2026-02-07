@@ -1,8 +1,9 @@
 """Schemas package."""
-from schemas.asset_schema import AssetResponse, AssetListResponse, AssetDTO
-from schemas.measurement_schema import MeasurementRequest, MeasurementResponse, MeasurementsListResponse
+from schemas.asset_schema import AssetResponse
+from schemas.measurement_schema import MeasurementRequest, MeasurementResponse, MeasurementsListResponse, SignalStatsResponse
 
 __all__ = [
-    "AssetResponse", "AssetListResponse", "AssetDTO",
-    "MeasurementRequest", "MeasurementResponse", "MeasurementsListResponse"
+    "AssetResponse",
+    "MeasurementRequest", "MeasurementResponse", "MeasurementsListResponse",
+    "SignalStatsResponse",
 ]

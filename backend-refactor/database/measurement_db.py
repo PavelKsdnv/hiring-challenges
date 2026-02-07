@@ -1,11 +1,12 @@
 """Database operations for measurements."""
 from datetime import datetime
-from typing import List, Dict, Optional
+from typing import List
 import csv
 from core.config import get_settings
 from utils.date_utils import parse_date
+from models.measurement import MeasurementModel
 
-def get_measurements(signal_ids: List[str], from_date: datetime, to_date: datetime) -> List[Dict]:
+def get_measurements(signal_ids: List[str], from_date: datetime, to_date: datetime) -> List[MeasurementModel]:
     """Get measurements for given signal IDs and date range."""
     settings = get_settings()
     measurements = []
@@ -24,11 +25,11 @@ def get_measurements(signal_ids: List[str], from_date: datetime, to_date: dateti
             # Parse value (European format uses comma as decimal separator)
             value_str = row.get("MeasurementValue", "0").replace(",", ".")
 
-            measurements.append({
-                "signal_id": signal_id,
-                "timestamp": ts.isoformat(),
-                "value": float(value_str),
-                "unit": "kV"
-            })
+            measurements.append(MeasurementModel(
+                signal_id=signal_id,
+                timestamp=ts,
+                value=float(value_str),
+                unit="kV" # todo add proper unit retrieval
+            ))
 
     return measurements

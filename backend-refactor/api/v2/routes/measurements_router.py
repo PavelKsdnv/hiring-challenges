@@ -1,22 +1,21 @@
 """Measurements router (v2 style but registered as v1)."""
 from fastapi import APIRouter, HTTPException, Query
-from typing import Any
 from datetime import datetime
 from services.measurement_service import MeasurementService
+from schemas.measurement_schema import SignalStatsResponse
 
-# pesho add typing to function calls
 router = APIRouter()
 
 measurement_service = MeasurementService()
 
-@router.get("/measurements/stats/{signal_id}", response_model=Any)
+@router.get("/measurements/stats/{signal_id}", response_model=SignalStatsResponse)
 async def get_signal_stats(
     signal_id: str,
     from_date: str = Query(..., alias="from", description="Start date (ISO format)"),
     to_date: str = Query(..., alias="to", description="End date (ISO format)")
 ):
     """Calculate statistics for a signal over a date range.
-    
+
     Returns:
         - count: Number of measurements
         - mean: Average value
@@ -28,10 +27,9 @@ async def get_signal_stats(
     try:
         from_dt = datetime.fromisoformat(from_date)
         to_dt = datetime.fromisoformat(to_date)
-        
+
         return measurement_service.calculate_signal_stats(signal_id, from_dt, to_dt)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error calculating stats: {str(e)}")
-

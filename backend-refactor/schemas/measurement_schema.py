@@ -22,3 +22,15 @@ class MeasurementsListResponse(BaseModel):
     """List of measurements response."""
     measurements: List[MeasurementResponse]
 
+
+class SignalStatsResponse(BaseModel):
+    """Response schema for signal statistics."""
+    signal_id: str
+    from_date: str
+    to_date: str
+    count: int
+    mean: Optional[float] = None
+    min: Optional[float] = None
+    max: Optional[float] = None
+    median: Optional[float] = None
+    std_dev: Optional[float] = None
