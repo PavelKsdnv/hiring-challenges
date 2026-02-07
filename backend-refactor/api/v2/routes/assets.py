@@ -9,6 +9,7 @@ router = APIRouter()
 
 asset_service = None
 def set_asset_service(service: AssetService):
+    global asset_service
     asset_service = service
 
 @router.get("/assets", response_model=List[AssetResponse])

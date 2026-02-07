@@ -11,9 +11,8 @@ class MeasurementRequest(BaseModel):
     to_date: datetime
 
 def validate_data(data, fromdt, to): # pesho too generic/bad namings here
-    data = get_date()
     data_new = []
-   
+
     for data_point in data:
         ts = datetime.fromisoformat(data_point['timestamp'])
         if fromdt <= ts <= to:

@@ -4,7 +4,7 @@ from pkgutil import get_data
 from typing import List, Dict
 from utils.date_utils import validate_date_range, check_date_range
 from utils.measurement_utils import format_measurement
-from db.measurement_db import get_measurements, fetch_measurements
+from db.measurement_db import get_measurements
 import statistics
     
 class MeasurementService:
@@ -17,13 +17,7 @@ class MeasurementService:
         
         measurements = get_measurements(signal_ids, from_date, to_date)
         return [format_measurement(m) for m in measurements]
-    
-    def fetch_measurements_data(self, signals: List[str], start: datetime, end: datetime) -> List[Dict]:
-        """Alternative method."""
-        if not check_date_range(start, end):
-            raise ValueError("Invalid date range")
-        return fetch_measurements(signals, start, end)
-    
+
     def calculate_signal_stats(self, signal_id: str, from_date: datetime, to_date: datetime) -> Dict:
         """Calculate statistics for a signal over a date range."""
         if not validate_date_range(from_date, to_date):
