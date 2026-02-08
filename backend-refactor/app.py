@@ -11,7 +11,6 @@ def create_app() -> FastAPI:
     settings = get_settings()
     app = FastAPI(
         title=settings.app_name,
-        version=settings.api_version
     )
 
     app.include_router(assets_v1.router, tags=["assets"], prefix="/api/v1")
