@@ -2,7 +2,7 @@
 from functools import lru_cache
 from core.settings import AppSettings
 
-@lru_cache() # maybe use a clearer singleton implementation
+@lru_cache()
 def get_settings() -> AppSettings:
     """Get cached application settings."""
     return AppSettings()
